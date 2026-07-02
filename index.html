@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WorldWideWeb Browser - v1.0</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #C0C0C0;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    color: #000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TITLE BAR */
+  .titlebar {
+    background: #000080;
+    color: #fff;
+    font-family: "Arial", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 3px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  .titlebar-controls {
+    display: flex;
+    gap: 2px;
+  }
+
+  .titlebar-btn {
+    width: 16px;
+    height: 14px;
+    background: #C0C0C0;
+    border: 1px solid;
+    border-color: #fff #808080 #808080 #fff;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: "Arial", sans-serif;
+  }
+
+  /* MENU BAR */
+  .menubar {
+    background: #C0C0C0;
+    border-bottom: 1px solid #808080;
+    padding: 2px 4px;
+    display: flex;
+    gap: 16px;
+    font-family: "Arial", sans-serif;
+    font-size: 12px;
+    user-select: none;
+  }
+
+  .menubar span {
+    padding: 2px 6px;
+    cursor: pointer;
+  }
+
+  .menubar span:hover {
+    background: #000080;
+    color: #fff;
+  }
+
+  /* TOOLBAR */
+  .toolbar {
+    background: #C0C0C0;
+    border-bottom: 2px solid #808080;
+    padding: 4px 6px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .toolbar-btn {
+    min-width: 52px;
+    height: 28px;
+    background: #C0C0C0;
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
+    font-family: "Arial", sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .toolbar-btn:active {
+    border-color: #808080 #fff #fff #808080;
+  }
+
+  .toolbar-sep {
+    width: 1px;
+    height: 24px;
+    background: #808080;
+    margin: 0 4px;
+  }
+
+  /* ADDRESS BAR */
+  .addressbar {
+    background: #C0C0C0;
+    border-bottom: 1px solid #808080;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Arial", sans-serif;
+    font-size: 12px;
+  }
+
+  .addressbar-label {
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .addressbar-input {
+    flex: 1;
+    height: 22px;
+    background: #fff;
+    border: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 0 4px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    outline: none;
+  }
+
+  /* MAIN CONTENT */
+  .browser-window {
+    flex: 1;
+    background: #fff;
+    border: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    margin: 4px;
+    overflow-y: auto;
+    padding: 16px 20px;
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    border: 2px solid #000080;
+    padding: 12px;
+    margin-bottom: 16px;
+    background: #f0f0f8;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .page-header-title {
+    font-family: "Arial", sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000080;
+    letter-spacing: 8px;
+  }
+
+  .page-header-sub {
+    font-size: 11px;
+    color: #444;
+    margin-top: 4px;
+    font-family: "Arial", sans-serif;
+  }
+
+  /* HORIZONTAL RULE */
+  hr {
+    border: none;
+    border-top: 1px solid #808080;
+    margin: 12px 0;
+  }
+
+  /* TEXT STYLES */
+  .page-body p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  a {
+    color: #0000EE;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  a:visited { color: #551A8B; }
+
+  /* BULLET LIST */
+  .bullet-list {
+    margin: 8px 0 8px 8px;
+  }
+
+  .bullet-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+
+  .bullet-list li::before {
+    content: "●";
+    color: #000080;
+    font-size: 10px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .date-label {
+    font-style: italic;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  /* STATUSBAR */
+  .statusbar {
+    background: #C0C0C0;
+    border-top: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 2px 8px;
+    font-family: "Arial", sans-serif;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 4px 4px;
+  }
+
+  /* TYPING ANIMATION */
+  .typing {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #000;
+    animation: typing 3s steps(60, end) forwards, blink 0.75s step-end infinite;
+    width: 0;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: #000 }
+  }
+
+  /* BLINK TAG */
+  .blink {
+    animation: blink-text 1s step-end infinite;
+  }
+
+  @keyframes blink-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Fade in rows */
+  .fade-row {
+    opacity: 0;
+    animation: fadein 0.4s ease forwards;
+  }
+
+  @keyframes fadein {
+    to { opacity: 1; }
+  }
+
+  .d1 { animation-delay: 0.2s; }
+  .d2 { animation-delay: 0.6s; }
+  .d3 { animation-delay: 1.0s; }
+  .d4 { animation-delay: 1.4s; }
+  .d5 { animation-delay: 1.8s; }
+  .d6 { animation-delay: 2.2s; }
+  .d7 { animation-delay: 2.6s; }
+  .d8 { animation-delay: 3.0s; }
+</style>
+</head>
+<body>
+
+<!-- TITLE BAR -->
+<div class="titlebar">
+  <span>WorldWideWeb Browser — Document</span>
+  <div class="titlebar-controls">
+    <div class="titlebar-btn">_</div>
+    <div class="titlebar-btn">□</div>
+    <div class="titlebar-btn">✕</div>
+  </div>
+</div>
+
+<!-- MENU BAR -->
+<div class="menubar">
+  <span>File</span>
+  <span>Edit</span>
+  <span>Options</span>
+  <span>Navigate</span>
+  <span>Annotate</span>
+  <span>Help</span>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <button class="toolbar-btn">◀ Back</button>
+  <button class="toolbar-btn">▶ Next</button>
+  <button class="toolbar-btn">⌂ Home</button>
+  <div class="toolbar-sep"></div>
+  <button class="toolbar-btn">↺ Reload</button>
+  <button class="toolbar-btn">✕ Stop</button>
+</div>
+
+<!-- ADDRESS BAR -->
+<div class="addressbar">
+  <span class="addressbar-label">Document URL:</span>
+  <input class="addressbar-input" value="http://www.worldwideweb.org/about/internet.html" readonly>
+</div>
+
+<!-- BROWSER WINDOW -->
+<div class="browser-window">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header fade-row d1">
+    <div>
+      <div class="page-header-title">INTERNET</div>
+      <div class="page-header-sub">World Wide Web Information Document · Est. 1991</div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <p class="fade-row d2">
+      Welcome to the <a>World Wide Web</a>. This document contains information about the internet and how it is used to share text, data, and hyperlinked documents across the global network.
+    </p>
+
+    <hr class="fade-row d2">
+
+    <p class="date-label fade-row d3">Jan '94</p>
+
+    <p class="fade-row d3">
+      For decades, the internet was built around text. Documents were written, shared, and stored as words on a page. The <a>hyperlink</a> made it possible to connect one document to another, and the web was born.
+    </p>
+
+    <p class="fade-row d4">
+      Then images became the language of the web. Photographs, illustrations, and graphics began to fill pages that were once purely text. Software could read images, index them, and make them searchable.
+    </p>
+
+    <p class="fade-row d5">
+      <strong>Now, the world runs on video.</strong>
+    </p>
+
+    <hr class="fade-row d5">
+
+    <p class="fade-row d5">Available resources on this document server:</p>
+
+    <ul class="bullet-list">
+      <li class="fade-row d6"><a>Text documents</a> — fully indexed and searchable</li>
+      <li class="fade-row d6"><a>Image libraries</a> — browsable by filename and tag</li>
+      <li class="fade-row d7"><a>Video files</a> — stored, but the content is there. Software just can't reach it. <span class="blink">_</span></li>
+    </ul>
+
+    <hr class="fade-row d7">
+
+    <p class="fade-row d8">
+      But video is the hardest format for software to understand. Hours of footage sit in folders, unlabeled, unsearchable, and unreachable. The content is there. Software just can't reach it.
+    </p>
+
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div class="statusbar">
+  <span>Document: Done</span>
+  <span>NUM</span>
+</div>
+
+</body>
+</html>
