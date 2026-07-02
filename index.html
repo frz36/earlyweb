@@ -5,19 +5,23 @@
 <title>Internet Eras</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sans-serif; background: #C0C0C0; }
+html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sans-serif; }
 
 #hint {
   position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
   font-size: 11px; color: rgba(0,0,0,0.35); z-index: 9999;
-  pointer-events: none; letter-spacing: 0.08em; transition: opacity 0.5s;
-  font-family: Arial, sans-serif;
+  pointer-events: none; letter-spacing: 0.08em; transition: opacity 0.6s;
+  background: rgba(255,255,255,0.6); padding: 6px 14px; border-radius: 20px;
+  backdrop-filter: blur(8px);
 }
+#hint.dark { color: rgba(255,255,255,0.5); background: rgba(0,0,0,0.3); }
 
-.era { position: fixed; inset: 0; transition: opacity 0.7s ease; cursor: pointer; }
+.era { position: fixed; inset: 0; transition: opacity 0.8s ease; cursor: pointer; }
 .era.hidden { opacity: 0; pointer-events: none; }
 
-/* ══ ERA 1 — 90s Web ══ */
+/* ════════════════════════════
+   ERA 1 — 90s Web (light)
+════════════════════════════ */
 #era1 {
   background: #C0C0C0;
   font-family: "Times New Roman", serif;
@@ -33,7 +37,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
   width: 16px; height: 14px; background: #C0C0C0;
   border: 1px solid; border-color: #fff #808080 #808080 #fff;
   font-size: 9px; display: inline-flex; align-items: center; justify-content: center;
-  margin-left: 2px;
+  margin-left: 2px; cursor: pointer;
 }
 .e1-menubar {
   background: #C0C0C0; border-bottom: 1px solid #808080;
@@ -49,8 +53,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
 .e1-btn {
   min-width: 56px; height: 28px; background: #C0C0C0;
   border: 2px solid; border-color: #fff #808080 #808080 #fff;
-  font-family: Arial, sans-serif; font-size: 11px; cursor: pointer;
-  padding: 0 8px;
+  font-family: Arial, sans-serif; font-size: 11px; cursor: pointer; padding: 0 8px;
 }
 .e1-addrbar {
   background: #C0C0C0; border-bottom: 1px solid #808080;
@@ -67,9 +70,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
   border: 2px solid; border-color: #808080 #fff #fff #808080;
   margin: 4px; overflow-y: auto; padding: 20px;
 }
-.e1-header {
-  border: 2px solid #000080; padding: 12px; margin-bottom: 16px; background: #f0f0f8;
-}
+.e1-header { border: 2px solid #000080; padding: 12px; margin-bottom: 16px; background: #f0f0f8; }
 .e1-title { font-family: Arial, sans-serif; font-size: 28px; font-weight: bold; color: #000080; letter-spacing: 8px; }
 .e1-sub { font-size: 11px; color: #444; margin-top: 4px; font-family: Arial, sans-serif; }
 #era1 hr { border: none; border-top: 1px solid #808080; margin: 12px 0; }
@@ -87,7 +88,9 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
 .blink { animation: bl 1s step-end infinite; }
 @keyframes bl { 0%,100%{opacity:1} 50%{opacity:0} }
 
-/* ══ ERA 2 — XP Skeumorphism ══ */
+/* ════════════════════════════
+   ERA 2 — XP Skeumorphism (light)
+════════════════════════════ */
 #era2 {
   background: #3a6ea5;
   background-image: linear-gradient(to bottom, #5a9fd4 0%, #3a6ea5 8%, #3a6ea5 92%, #1a3060 100%);
@@ -99,7 +102,6 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
 }
 .sk-icon { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 64px; cursor: pointer; }
 .sk-icon span { font-size: 11px; color: #fff; text-align: center; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
-
 .sk-taskbar {
   position: absolute; bottom: 0; left: 0; right: 0; height: 36px;
   background: linear-gradient(to bottom, #245edc, #1941a5 4%, #2052cc 6%, #1646b4 96%, #0a2880);
@@ -130,18 +132,14 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
   opacity: 0; transition: opacity 0.8s 0.3s;
 }
 .sk-vo.show { opacity: 1; }
-
-/* Popup windows */
 .sk-win {
   position: absolute; background: #ece9d8;
   border: 2px solid #fff; border-radius: 4px 4px 0 0;
   box-shadow: 3px 3px 10px rgba(0,0,0,0.5), inset 0 0 0 1px #a0a0a0;
   opacity: 0; transform: scale(0.9) translateY(8px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  z-index: 10;
+  transition: opacity 0.4s ease, transform 0.4s ease; z-index: 10;
 }
 .sk-win.show { opacity: 1; transform: scale(1) translateY(0); }
-
 .sk-winbar {
   background: linear-gradient(to bottom, #0a246a, #a6caf0 1px, #0a246a 2px, #3169c6 30%, #3169c6);
   padding: 4px 6px; display: flex; align-items: center; gap: 6px; border-radius: 3px 3px 0 0;
@@ -158,14 +156,11 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
   font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;
 }
 .sk-wbtn.x { background: linear-gradient(to bottom, #e05050, #a02020); color: #fff; }
-
 .sk-winbody { padding: 10px; font-family: Arial, sans-serif; font-size: 12px; color: #000; }
-
 .imgrid { display: grid; gap: 6px; margin-bottom: 8px; }
 .imgrid.g2 { grid-template-columns: 1fr 1fr; }
 .imgrid.g3 { grid-template-columns: 1fr 1fr 1fr; }
 .imgrid.g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
-
 .imgcell {
   aspect-ratio: 4/3; border: 2px inset #808080;
   display: flex; align-items: center; justify-content: center;
@@ -183,13 +178,183 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
 .ct  { background: linear-gradient(135deg,#40b0b0,#208080); }
 .cr  { background: linear-gradient(135deg,#e04040,#a01010); }
 .cy  { background: linear-gradient(135deg,#e0c040,#a08010); }
+
+/* ════════════════════════════
+   ERA 3 — Video Era (LIGHT)
+════════════════════════════ */
+#era3 {
+  background: #f5f5f7;
+  font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+
+/* Nav */
+.e3-nav {
+  background: rgba(245,245,247,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 14px 40px;
+  display: flex; align-items: center; gap: 24px;
+  flex-shrink: 0; z-index: 10;
+}
+.e3-nav-logo { font-size: 20px; font-weight: 700; color: #1d1d1f; letter-spacing: -0.03em; }
+.e3-nav-links { display: flex; gap: 20px; }
+.e3-nav-links span { font-size: 13px; color: #6e6e73; cursor: pointer; }
+.e3-nav-links span:hover { color: #1d1d1f; }
+.e3-nav-links span.active { color: #1d1d1f; font-weight: 500; }
+
+/* Hero */
+.e3-hero {
+  position: relative; flex-shrink: 0;
+  height: 58vh; overflow: hidden;
+  background: linear-gradient(135deg, #e8e4f0 0%, #f0e8e8 30%, #e8f0e8 60%, #e8ecf8 100%);
+}
+.e3-hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 50%, rgba(120,60,200,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 80%, rgba(200,80,80,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(60,120,200,0.1) 0%, transparent 40%);
+}
+
+/* Abstract video shapes */
+.e3-shapes { position: absolute; inset: 0; }
+.shape {
+  position: absolute; border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.s1 {
+  width: 260px; height: 160px; right: 120px; top: 60px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  transform: rotate(-3deg);
+}
+.s2 {
+  width: 200px; height: 120px; right: 60px; top: 200px;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  transform: rotate(4deg);
+}
+.s3 {
+  width: 180px; height: 110px; right: 260px; top: 180px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  transform: rotate(-6deg);
+}
+.s4 {
+  width: 140px; height: 88px; right: 340px; top: 80px;
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+  transform: rotate(2deg);
+}
+.s5 {
+  width: 100px; height: 64px; right: 100px; top: 320px;
+  background: linear-gradient(135deg, #fa709a, #fee140);
+  transform: rotate(-4deg);
+}
+
+/* Play icons on shapes */
+.shape::after {
+  content: '▶';
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7); font-size: 24px;
+}
+.s4::after, .s5::after { font-size: 16px; }
+
+/* Floating labels on shapes */
+.shape-label {
+  position: absolute; bottom: 8px; left: 10px; right: 10px;
+  background: rgba(0,0,0,0.25); color: #fff;
+  font-size: 9px; padding: 2px 6px; border-radius: 4px;
+  font-family: Arial, sans-serif; letter-spacing: 0.04em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Glow */
+.e3-glow {
+  position: absolute; top: 40%; right: 28%; width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(120,80,220,0.15) 0%, transparent 70%);
+  filter: blur(30px); pointer-events: none;
+}
+
+.e3-hero-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 0 40px 40px;
+}
+.e3-vo {
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(0,0,0,0.35); margin-bottom: 10px;
+  font-family: Arial, sans-serif;
+}
+.e3-hero-title {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 700; color: #1d1d1f; letter-spacing: -0.03em;
+  line-height: 1.05; margin-bottom: 10px;
+}
+.e3-hero-desc {
+  font-size: 14px; color: #6e6e73; max-width: 380px;
+  line-height: 1.55; margin-bottom: 20px;
+}
+.e3-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #1d1d1f; color: #fff;
+  border: none; border-radius: 980px;
+  padding: 12px 24px; font-size: 14px; font-weight: 600;
+  cursor: pointer; letter-spacing: -0.01em;
+  font-family: -apple-system, "SF Pro Display", Arial, sans-serif;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.e3-cta:hover { background: #3a3a3c; transform: scale(1.02); }
+
+/* Dots */
+.e3-dots {
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px;
+}
+.e3-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.15); }
+.e3-dot.active { background: #1d1d1f; width: 18px; border-radius: 3px; }
+
+/* Shelf */
+.e3-shelf {
+  flex: 1; padding: 24px 40px; overflow: hidden;
+  background: #f5f5f7;
+}
+.e3-shelf-title {
+  font-size: 17px; font-weight: 600; color: #1d1d1f;
+  margin-bottom: 16px; letter-spacing: -0.01em;
+}
+.e3-row { display: flex; gap: 14px; overflow: hidden; }
+.e3-card { flex-shrink: 0; width: calc(20% - 12px); cursor: pointer; }
+.e3-card:hover .e3-thumb { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.e3-thumb {
+  border-radius: 10px; overflow: hidden;
+  aspect-ratio: 16/9; margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.e3-progress {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: rgba(255,255,255,0.3);
+}
+.e3-pbar { height: 100%; background: #fff; border-radius: 2px; }
+.e3-card-title {
+  font-size: 12px; font-weight: 500; color: #1d1d1f;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;
+}
+.e3-card-sub { font-size: 11px; color: #6e6e73; }
+.tv1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+.tv2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.tv3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.tv4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+.tv5 { background: linear-gradient(135deg, #fa709a, #fee140); }
 </style>
 </head>
 <body>
 
 <div id="hint">click anywhere to continue →</div>
 
-<!-- ══ ERA 1 ══ -->
+<!-- ════ ERA 1 ════ -->
 <div class="era" id="era1">
   <div class="e1-titlebar">
     <span>WorldWideWeb Browser — Document</span>
@@ -216,40 +381,33 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
       <div class="e1-sub">World Wide Web Information Document · Est. 1991</div>
     </div>
     <p>Welcome to the <a>World Wide Web</a>. This document contains information about the internet and how it is used to share text, data, and hyperlinked documents across the global network.</p>
-    <hr>
+    <hr style="border:none;border-top:1px solid #808080;margin:12px 0">
     <p style="font-style:italic;font-size:13px">Jan '94</p>
     <p>For decades, the internet was built around text. Documents were written, shared, and stored as words on a page. The <a>hyperlink</a> made it possible to connect one document to another, and the web was born.</p>
-    <hr>
+    <hr style="border:none;border-top:1px solid #808080;margin:12px 0">
     <p>Available resources on this document server:</p>
     <ul class="e1-list">
       <li>Text documents — fully indexed and searchable</li>
       <li>Image libraries — not yet. Coming soon.</li>
       <li>Video files — not supported <span class="blink">_</span></li>
     </ul>
-    <hr>
+    <hr style="border:none;border-top:1px solid #808080;margin:12px 0">
     <p>The content is there. Software just can't reach it yet.</p>
   </div>
   <div class="e1-statusbar"><span>Document: Done</span><span>NUM</span></div>
 </div>
 
-<!-- ══ ERA 2 ══ -->
+<!-- ════ ERA 2 ════ -->
 <div class="era hidden" id="era2">
-
   <div class="sk-vo" id="skvo">Then images became the language of the web.</div>
-
   <div class="sk-icons">
     <div class="sk-icon"><div style="font-size:32px">🖥️</div><span>My Computer</span></div>
     <div class="sk-icon"><div style="font-size:32px">🌐</div><span>Internet Explorer</span></div>
     <div class="sk-icon"><div style="font-size:32px">🗑️</div><span>Recycle Bin</span></div>
     <div class="sk-icon"><div style="font-size:32px">📁</div><span>My Photos</span></div>
   </div>
-
-  <!-- Win 1: Photo Explorer -->
   <div class="sk-win" id="w1" style="left:90px;top:56px;width:340px;z-index:12">
-    <div class="sk-winbar">
-      <div class="sk-wintitle">📁 My Photo Gallery — Windows Explorer</div>
-      <div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div>
-    </div>
+    <div class="sk-winbar"><div class="sk-wintitle">📁 My Photo Gallery — Windows Explorer</div><div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div></div>
     <div class="sk-winbody">
       <div class="imgrid g4" style="margin-bottom:6px">
         <div class="imgcell cb">🏔️<div class="lbl">Alps.jpg</div></div>
@@ -266,17 +424,11 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
       <div style="margin-top:8px;font-size:11px;color:#555">8 objects · 24.4 MB</div>
     </div>
   </div>
-
-  <!-- Win 2: Flickr browser -->
-  <div class="sk-win" id="w2" style="left:300px;top:28px;width:420px;z-index:13">
-    <div class="sk-winbar">
-      <div class="sk-wintitle">🌐 Flickr — Share your photos! — Internet Explorer</div>
-      <div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div>
-    </div>
+  <div class="sk-win" id="w2" style="left:300px;top:28px;width:400px;z-index:13">
+    <div class="sk-winbar"><div class="sk-wintitle">🌐 Flickr — Share your photos! — Internet Explorer</div><div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div></div>
     <div class="sk-winbody">
       <div style="background:#0063dc;padding:6px 10px;margin:-10px -10px 10px;color:#fff;font-size:13px;font-weight:bold;display:flex;align-items:center;gap:8px">
-        <span style="font-size:20px">📸</span><span>flickr</span>
-        <span style="margin-left:auto;font-size:11px;font-weight:normal">Explore · Upload · Groups</span>
+        <span style="font-size:20px">📸</span><span>flickr</span><span style="margin-left:auto;font-size:11px;font-weight:normal">Explore · Upload · Groups</span>
       </div>
       <div class="imgrid g3">
         <div class="imgcell ct">🌊<div class="lbl">by user_87</div></div>
@@ -286,45 +438,25 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
       <div style="margin-top:8px;font-size:11px;color:#0063dc;text-decoration:underline;cursor:pointer">🔍 Search 3,847,291 photos...</div>
     </div>
   </div>
-
-  <!-- Win 3: Picture Viewer -->
   <div class="sk-win" id="w3" style="right:60px;top:80px;width:260px;z-index:15">
-    <div class="sk-winbar">
-      <div class="sk-wintitle">🖼️ Windows Picture Viewer</div>
-      <div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div>
-    </div>
+    <div class="sk-winbar"><div class="sk-wintitle">🖼️ Windows Picture Viewer</div><div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div></div>
     <div class="sk-winbody" style="padding:0">
-      <div style="width:100%;height:150px;background:linear-gradient(135deg,#e08030,#a04010,#602000);display:flex;align-items:center;justify-content:center;font-size:52px">🌅</div>
+      <div style="width:100%;height:140px;background:linear-gradient(135deg,#e08030,#a04010);display:flex;align-items:center;justify-content:center;font-size:48px">🌅</div>
       <div style="background:#f0f0e8;padding:6px 10px;display:flex;justify-content:space-between;border-top:1px solid #c0c0c0">
-        <span style="font-size:11px;color:#555">Sunset_Bali_2007.jpg</span>
-        <span style="font-size:11px;color:#555">1024×768</span>
+        <span style="font-size:11px;color:#555">Sunset_Bali_2007.jpg</span><span style="font-size:11px;color:#555">1024×768</span>
       </div>
       <div style="background:#ece9d8;padding:4px;display:flex;gap:8px;justify-content:center;border-top:1px solid #c0c0c0">
-        <span style="font-size:16px;cursor:pointer">◀</span>
-        <span style="font-size:16px;cursor:pointer">🔍</span>
-        <span style="font-size:16px;cursor:pointer">🖨️</span>
-        <span style="font-size:16px;cursor:pointer">▶</span>
+        <span style="font-size:16px;cursor:pointer">◀</span><span style="font-size:16px;cursor:pointer">🔍</span><span style="font-size:16px;cursor:pointer">🖨️</span><span style="font-size:16px;cursor:pointer">▶</span>
       </div>
     </div>
   </div>
-
-  <!-- Win 4: MySpace -->
-  <div class="sk-win" id="w4" style="left:180px;bottom:50px;width:380px;z-index:14">
-    <div class="sk-winbar">
-      <div class="sk-wintitle">🌐 MySpace — Tom's Profile — Internet Explorer</div>
-      <div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div>
-    </div>
+  <div class="sk-win" id="w4" style="left:180px;bottom:48px;width:360px;z-index:14">
+    <div class="sk-winbar"><div class="sk-wintitle">🌐 MySpace — Tom's Profile — Internet Explorer</div><div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div></div>
     <div class="sk-winbody">
-      <div style="background:#003399;padding:4px 8px;margin:-10px -10px 10px;color:#fff;font-size:12px;font-weight:bold">
-        myspace. &nbsp;|&nbsp; <span style="font-weight:normal">Home &nbsp; Browse &nbsp; Photos &nbsp; Video</span>
-      </div>
+      <div style="background:#003399;padding:4px 8px;margin:-10px -10px 10px;color:#fff;font-size:12px;font-weight:bold">myspace. &nbsp;|&nbsp;<span style="font-weight:normal">Home &nbsp; Browse &nbsp; Photos &nbsp; Video</span></div>
       <div style="display:flex;gap:10px;margin-bottom:10px">
-        <div style="width:56px;height:56px;background:linear-gradient(135deg,#4a90d9,#2060a0);border:2px solid #888;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">👤</div>
-        <div>
-          <div style="font-weight:bold;font-size:13px">Tom Anderson</div>
-          <div style="font-size:11px;color:#555;margin:2px 0">34 · Los Angeles</div>
-          <div style="font-size:11px;color:#0000cc;text-decoration:underline;cursor:pointer">View Photos (247)</div>
-        </div>
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#4a90d9,#2060a0);border:2px solid #888;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">👤</div>
+        <div><div style="font-weight:bold;font-size:13px">Tom Anderson</div><div style="font-size:11px;color:#555;margin:2px 0">34 · Los Angeles</div><div style="font-size:11px;color:#0000cc;text-decoration:underline;cursor:pointer">View Photos (247)</div></div>
       </div>
       <div class="imgrid g4">
         <div class="imgcell cpk">🎸<div class="lbl">concert</div></div>
@@ -334,56 +466,126 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sa
       </div>
     </div>
   </div>
-
-  <!-- Win 5: Alert -->
-  <div class="sk-win" id="w5" style="right:70px;bottom:110px;width:220px;z-index:16">
-    <div class="sk-winbar">
-      <div class="sk-wintitle">⚠️ New Images Available</div>
-      <div class="sk-winbtns"><div class="sk-wbtn x">✕</div></div>
-    </div>
+  <div class="sk-win" id="w5" style="right:70px;bottom:100px;width:220px;z-index:16">
+    <div class="sk-winbar"><div class="sk-wintitle">⚠️ New Images Available</div><div class="sk-winbtns"><div class="sk-wbtn x">✕</div></div></div>
     <div class="sk-winbody" style="text-align:center">
       <div style="font-size:32px;margin-bottom:8px">🖼️</div>
       <p style="font-size:12px;margin-bottom:10px">The web speaks images now.<br>Software can finally see the page.</p>
-      <div style="font-size:11px;color:#555;border-top:1px solid #ccc;padding-top:8px">
-        But video? Still just a filename. <span class="blink">_</span>
-      </div>
+      <div style="font-size:11px;color:#555;border-top:1px solid #ccc;padding-top:8px">But video? Still just a filename. <span class="blink">_</span></div>
     </div>
   </div>
-
-  <!-- Taskbar -->
   <div class="sk-taskbar">
     <button class="sk-start">🪟 Start</button>
     <div class="sk-task">📁 My Photo Gallery</div>
-    <div class="sk-task">🌐 Flickr - Internet Explorer</div>
+    <div class="sk-task">🌐 Flickr</div>
     <div class="sk-task">🖼️ Picture Viewer</div>
     <div class="sk-clock" id="clock">10:32 AM</div>
   </div>
+</div>
 
+<!-- ════ ERA 3 ════ -->
+<div class="era hidden" id="era3">
+  <div class="e3-nav">
+    <div class="e3-nav-logo">▶ VideoOS</div>
+    <div class="e3-nav-links">
+      <span class="active">Home</span>
+      <span>Watch Now</span>
+      <span>Library</span>
+      <span>Search</span>
+    </div>
+  </div>
+
+  <div class="e3-hero">
+    <div class="e3-hero-bg"></div>
+    <div class="e3-glow"></div>
+    <div class="e3-shapes">
+      <div class="shape s1"><div class="shape-label">CAMPAIGN_FINAL_v3.mp4</div></div>
+      <div class="shape s2"><div class="shape-label">customer_testimonial_07.mp4</div></div>
+      <div class="shape s3"><div class="shape-label">Q3_allhands_rec.mp4</div></div>
+      <div class="shape s4"><div class="shape-label">brand_reel.mp4</div></div>
+      <div class="shape s5"><div class="shape-label">demo.mp4</div></div>
+    </div>
+    <div class="e3-hero-content">
+      <div class="e3-vo">Now, the world runs on video.</div>
+      <div class="e3-hero-title">Billions of hours.<br>One question.</div>
+      <p class="e3-hero-desc">Every moment, every insight, every story is captured in video. The question is: can you actually reach it?</p>
+      <button class="e3-cta">▶ &nbsp;Enter Video Era</button>
+    </div>
+    <div class="e3-dots">
+      <div class="e3-dot active"></div>
+      <div class="e3-dot"></div>
+      <div class="e3-dot"></div>
+      <div class="e3-dot"></div>
+      <div class="e3-dot"></div>
+    </div>
+  </div>
+
+  <div class="e3-shelf">
+    <div class="e3-shelf-title">Continue Watching</div>
+    <div class="e3-row">
+      <div class="e3-card">
+        <div class="e3-thumb tv1">🎬<div class="e3-progress"><div class="e3-pbar" style="width:30%"></div></div></div>
+        <div class="e3-card-title">Brand Campaign 2024</div>
+        <div class="e3-card-sub">Recently Added</div>
+      </div>
+      <div class="e3-card">
+        <div class="e3-thumb tv2">📹<div class="e3-progress"><div class="e3-pbar" style="width:65%"></div></div></div>
+        <div class="e3-card-title">Q3 All Hands Recording</div>
+        <div class="e3-card-sub">Continue · 48:22</div>
+      </div>
+      <div class="e3-card">
+        <div class="e3-thumb tv3">🎥<div class="e3-progress"><div class="e3-pbar" style="width:10%"></div></div></div>
+        <div class="e3-card-title">Customer Testimonials</div>
+        <div class="e3-card-sub">Continue · S1, E7</div>
+      </div>
+      <div class="e3-card">
+        <div class="e3-thumb tv4">🎞️<div class="e3-progress"><div class="e3-pbar" style="width:80%"></div></div></div>
+        <div class="e3-card-title">Competitor Ad Library</div>
+        <div class="e3-card-sub">Recently Added</div>
+      </div>
+      <div class="e3-card">
+        <div class="e3-thumb tv5">📽️<div class="e3-progress"><div class="e3-pbar" style="width:45%"></div></div></div>
+        <div class="e3-card-title">Product Demo Cuts</div>
+        <div class="e3-card-sub">Continue · S1, E1</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
   let era = 1;
 
-  // Clock
   function tick() {
     const d = new Date(), h = d.getHours() % 12 || 12, m = d.getMinutes();
-    document.getElementById('clock').textContent = `${h}:${String(m).padStart(2,'0')} ${d.getHours()>=12?'PM':'AM'}`;
+    const el = document.getElementById('clock');
+    if(el) el.textContent = `${h}:${String(m).padStart(2,'0')} ${d.getHours()>=12?'PM':'AM'}`;
   }
   setInterval(tick, 1000); tick();
 
   function showEra2() {
     document.getElementById('era1').classList.add('hidden');
     document.getElementById('era2').classList.remove('hidden');
-    document.getElementById('hint').style.opacity = '0';
     era = 2;
-
     const wins = ['w1','w2','w3','w4','w5'];
-    const delays = [200, 500, 850, 1150, 1600];
-    wins.forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('show'), delays[i]));
+    [200,500,850,1150,1600].forEach((d,i) =>
+      setTimeout(() => document.getElementById(wins[i]).classList.add('show'), d)
+    );
     setTimeout(() => document.getElementById('skvo').classList.add('show'), 200);
+    document.getElementById('hint').textContent = 'click anywhere to continue →';
+    document.getElementById('hint').classList.add('dark');
   }
 
-  document.body.addEventListener('click', () => { if (era === 1) showEra2(); });
+  function showEra3() {
+    document.getElementById('era2').classList.add('hidden');
+    document.getElementById('era3').classList.remove('hidden');
+    era = 3;
+    document.getElementById('hint').style.opacity = '0';
+  }
+
+  document.body.addEventListener('click', () => {
+    if (era === 1) showEra2();
+    else if (era === 2) showEra3();
+  });
 </script>
 </body>
 </html>
