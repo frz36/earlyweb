@@ -2,384 +2,388 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>WorldWideWeb Browser - v1.0</title>
+<title>Internet Eras</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sans-serif; background: #C0C0C0; }
 
-  body {
-    background: #C0C0C0;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 14px;
-    color: #000;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+#hint {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  font-size: 11px; color: rgba(0,0,0,0.35); z-index: 9999;
+  pointer-events: none; letter-spacing: 0.08em; transition: opacity 0.5s;
+  font-family: Arial, sans-serif;
+}
 
-  /* TITLE BAR */
-  .titlebar {
-    background: #000080;
-    color: #fff;
-    font-family: "Arial", sans-serif;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 3px 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-  }
+.era { position: fixed; inset: 0; transition: opacity 0.7s ease; cursor: pointer; }
+.era.hidden { opacity: 0; pointer-events: none; }
 
-  .titlebar-controls {
-    display: flex;
-    gap: 2px;
-  }
+/* ══ ERA 1 — 90s Web ══ */
+#era1 {
+  background: #C0C0C0;
+  font-family: "Times New Roman", serif;
+  font-size: 14px; color: #000;
+  display: flex; flex-direction: column;
+}
+.e1-titlebar {
+  background: #000080; color: #fff;
+  font-family: Arial, sans-serif; font-size: 13px; font-weight: bold;
+  padding: 3px 8px; display: flex; justify-content: space-between; align-items: center;
+}
+.e1-tbtn {
+  width: 16px; height: 14px; background: #C0C0C0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 9px; display: inline-flex; align-items: center; justify-content: center;
+  margin-left: 2px;
+}
+.e1-menubar {
+  background: #C0C0C0; border-bottom: 1px solid #808080;
+  padding: 2px 4px; display: flex; gap: 16px;
+  font-family: Arial, sans-serif; font-size: 12px;
+}
+.e1-menubar span { padding: 2px 6px; cursor: pointer; }
+.e1-menubar span:hover { background: #000080; color: #fff; }
+.e1-toolbar {
+  background: #C0C0C0; border-bottom: 2px solid #808080;
+  padding: 4px 6px; display: flex; gap: 4px; align-items: center;
+}
+.e1-btn {
+  min-width: 56px; height: 28px; background: #C0C0C0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  font-family: Arial, sans-serif; font-size: 11px; cursor: pointer;
+  padding: 0 8px;
+}
+.e1-addrbar {
+  background: #C0C0C0; border-bottom: 1px solid #808080;
+  padding: 4px 8px; display: flex; align-items: center; gap: 8px;
+  font-family: Arial, sans-serif; font-size: 12px;
+}
+.e1-addrbar input {
+  flex: 1; height: 22px; background: #fff;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  padding: 0 4px; font-family: "Courier New", monospace; font-size: 12px; outline: none;
+}
+.e1-content {
+  flex: 1; background: #fff;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  margin: 4px; overflow-y: auto; padding: 20px;
+}
+.e1-header {
+  border: 2px solid #000080; padding: 12px; margin-bottom: 16px; background: #f0f0f8;
+}
+.e1-title { font-family: Arial, sans-serif; font-size: 28px; font-weight: bold; color: #000080; letter-spacing: 8px; }
+.e1-sub { font-size: 11px; color: #444; margin-top: 4px; font-family: Arial, sans-serif; }
+#era1 hr { border: none; border-top: 1px solid #808080; margin: 12px 0; }
+#era1 p { margin-bottom: 10px; line-height: 1.6; }
+#era1 a { color: #0000EE; text-decoration: underline; cursor: pointer; }
+.e1-list { margin: 8px 0 8px 8px; }
+.e1-list li { display: flex; gap: 8px; margin-bottom: 6px; line-height: 1.5; list-style: none; }
+.e1-list li::before { content: "●"; color: #000080; font-size: 10px; margin-top: 3px; flex-shrink: 0; }
+.e1-statusbar {
+  background: #C0C0C0; padding: 2px 8px;
+  font-family: Arial, sans-serif; font-size: 11px;
+  display: flex; justify-content: space-between;
+  border-top: 1px solid #808080; margin: 0 4px 4px;
+}
+.blink { animation: bl 1s step-end infinite; }
+@keyframes bl { 0%,100%{opacity:1} 50%{opacity:0} }
 
-  .titlebar-btn {
-    width: 16px;
-    height: 14px;
-    background: #C0C0C0;
-    border: 1px solid;
-    border-color: #fff #808080 #808080 #fff;
-    font-size: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-family: "Arial", sans-serif;
-  }
+/* ══ ERA 2 — XP Skeumorphism ══ */
+#era2 {
+  background: #3a6ea5;
+  background-image: linear-gradient(to bottom, #5a9fd4 0%, #3a6ea5 8%, #3a6ea5 92%, #1a3060 100%);
+  overflow: hidden;
+}
+.sk-icons {
+  position: absolute; top: 16px; left: 16px;
+  display: flex; flex-direction: column; gap: 16px; z-index: 1;
+}
+.sk-icon { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 64px; cursor: pointer; }
+.sk-icon span { font-size: 11px; color: #fff; text-align: center; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
 
-  /* MENU BAR */
-  .menubar {
-    background: #C0C0C0;
-    border-bottom: 1px solid #808080;
-    padding: 2px 4px;
-    display: flex;
-    gap: 16px;
-    font-family: "Arial", sans-serif;
-    font-size: 12px;
-    user-select: none;
-  }
+.sk-taskbar {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 36px;
+  background: linear-gradient(to bottom, #245edc, #1941a5 4%, #2052cc 6%, #1646b4 96%, #0a2880);
+  border-top: 1px solid #6090ff;
+  display: flex; align-items: center; gap: 4px; padding: 0 4px; z-index: 100;
+}
+.sk-start {
+  background: linear-gradient(to bottom, #56a040, #3a8028 50%, #2a6018);
+  border: 1px solid #1a4010; border-radius: 12px; color: #fff;
+  font-size: 13px; font-weight: bold; padding: 4px 14px 4px 10px;
+  cursor: pointer; font-family: Arial, sans-serif; display: flex; align-items: center; gap: 6px;
+}
+.sk-task {
+  background: linear-gradient(to bottom, #1646b4, #2052cc);
+  border: 1px solid #4070e0; border-radius: 3px;
+  color: #fff; font-size: 11px; padding: 3px 10px; cursor: pointer; font-family: Arial, sans-serif;
+}
+.sk-clock {
+  margin-left: auto; background: rgba(0,0,80,0.3);
+  border: 1px inset #2040a0; color: #fff; font-size: 11px;
+  padding: 3px 8px; font-family: Arial, sans-serif;
+}
+.sk-vo {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.9);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8); letter-spacing: 0.06em;
+  text-transform: uppercase; white-space: nowrap; z-index: 200;
+  opacity: 0; transition: opacity 0.8s 0.3s;
+}
+.sk-vo.show { opacity: 1; }
 
-  .menubar span {
-    padding: 2px 6px;
-    cursor: pointer;
-  }
+/* Popup windows */
+.sk-win {
+  position: absolute; background: #ece9d8;
+  border: 2px solid #fff; border-radius: 4px 4px 0 0;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.5), inset 0 0 0 1px #a0a0a0;
+  opacity: 0; transform: scale(0.9) translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 10;
+}
+.sk-win.show { opacity: 1; transform: scale(1) translateY(0); }
 
-  .menubar span:hover {
-    background: #000080;
-    color: #fff;
-  }
+.sk-winbar {
+  background: linear-gradient(to bottom, #0a246a, #a6caf0 1px, #0a246a 2px, #3169c6 30%, #3169c6);
+  padding: 4px 6px; display: flex; align-items: center; gap: 6px; border-radius: 3px 3px 0 0;
+}
+.sk-wintitle {
+  flex: 1; color: #fff; font-family: Arial, sans-serif; font-size: 12px; font-weight: bold;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sk-winbtns { display: flex; gap: 2px; }
+.sk-wbtn {
+  width: 18px; height: 16px;
+  background: linear-gradient(to bottom, #e0e0e0, #b0b0b0);
+  border: 1px solid #707070; border-radius: 2px;
+  font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.sk-wbtn.x { background: linear-gradient(to bottom, #e05050, #a02020); color: #fff; }
 
-  /* TOOLBAR */
-  .toolbar {
-    background: #C0C0C0;
-    border-bottom: 2px solid #808080;
-    padding: 4px 6px;
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
+.sk-winbody { padding: 10px; font-family: Arial, sans-serif; font-size: 12px; color: #000; }
 
-  .toolbar-btn {
-    min-width: 52px;
-    height: 28px;
-    background: #C0C0C0;
-    border: 2px solid;
-    border-color: #fff #808080 #808080 #fff;
-    font-family: "Arial", sans-serif;
-    font-size: 11px;
-    cursor: pointer;
-    padding: 0 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-  }
+.imgrid { display: grid; gap: 6px; margin-bottom: 8px; }
+.imgrid.g2 { grid-template-columns: 1fr 1fr; }
+.imgrid.g3 { grid-template-columns: 1fr 1fr 1fr; }
+.imgrid.g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
 
-  .toolbar-btn:active {
-    border-color: #808080 #fff #fff #808080;
-  }
-
-  .toolbar-sep {
-    width: 1px;
-    height: 24px;
-    background: #808080;
-    margin: 0 4px;
-  }
-
-  /* ADDRESS BAR */
-  .addressbar {
-    background: #C0C0C0;
-    border-bottom: 1px solid #808080;
-    padding: 4px 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: "Arial", sans-serif;
-    font-size: 12px;
-  }
-
-  .addressbar-label {
-    white-space: nowrap;
-    font-weight: bold;
-  }
-
-  .addressbar-input {
-    flex: 1;
-    height: 22px;
-    background: #fff;
-    border: 2px solid;
-    border-color: #808080 #fff #fff #808080;
-    padding: 0 4px;
-    font-family: "Courier New", monospace;
-    font-size: 12px;
-    outline: none;
-  }
-
-  /* MAIN CONTENT */
-  .browser-window {
-    flex: 1;
-    background: #fff;
-    border: 2px solid;
-    border-color: #808080 #fff #fff #808080;
-    margin: 4px;
-    overflow-y: auto;
-    padding: 16px 20px;
-  }
-
-  /* PAGE HEADER */
-  .page-header {
-    border: 2px solid #000080;
-    padding: 12px;
-    margin-bottom: 16px;
-    background: #f0f0f8;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .page-header-title {
-    font-family: "Arial", sans-serif;
-    font-size: 28px;
-    font-weight: bold;
-    color: #000080;
-    letter-spacing: 8px;
-  }
-
-  .page-header-sub {
-    font-size: 11px;
-    color: #444;
-    margin-top: 4px;
-    font-family: "Arial", sans-serif;
-  }
-
-  /* HORIZONTAL RULE */
-  hr {
-    border: none;
-    border-top: 1px solid #808080;
-    margin: 12px 0;
-  }
-
-  /* TEXT STYLES */
-  .page-body p {
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
-
-  a {
-    color: #0000EE;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  a:visited { color: #551A8B; }
-
-  /* BULLET LIST */
-  .bullet-list {
-    margin: 8px 0 8px 8px;
-  }
-
-  .bullet-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 4px;
-    line-height: 1.5;
-  }
-
-  .bullet-list li::before {
-    content: "●";
-    color: #000080;
-    font-size: 10px;
-    margin-top: 3px;
-    flex-shrink: 0;
-  }
-
-  .date-label {
-    font-style: italic;
-    margin-bottom: 8px;
-    font-size: 13px;
-  }
-
-  /* STATUSBAR */
-  .statusbar {
-    background: #C0C0C0;
-    border-top: 2px solid;
-    border-color: #808080 #fff #fff #808080;
-    padding: 2px 8px;
-    font-family: "Arial", sans-serif;
-    font-size: 11px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 4px 4px;
-  }
-
-  /* TYPING ANIMATION */
-  .typing {
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 2px solid #000;
-    animation: typing 3s steps(60, end) forwards, blink 0.75s step-end infinite;
-    width: 0;
-  }
-
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-
-  @keyframes blink {
-    from, to { border-color: transparent }
-    50% { border-color: #000 }
-  }
-
-  /* BLINK TAG */
-  .blink {
-    animation: blink-text 1s step-end infinite;
-  }
-
-  @keyframes blink-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  /* Fade in rows */
-  .fade-row {
-    opacity: 0;
-    animation: fadein 0.4s ease forwards;
-  }
-
-  @keyframes fadein {
-    to { opacity: 1; }
-  }
-
-  .d1 { animation-delay: 0.2s; }
-  .d2 { animation-delay: 0.6s; }
-  .d3 { animation-delay: 1.0s; }
-  .d4 { animation-delay: 1.4s; }
-  .d5 { animation-delay: 1.8s; }
-  .d6 { animation-delay: 2.2s; }
-  .d7 { animation-delay: 2.6s; }
-  .d8 { animation-delay: 3.0s; }
+.imgcell {
+  aspect-ratio: 4/3; border: 2px inset #808080;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; position: relative;
+}
+.imgcell .lbl {
+  position: absolute; bottom: 2px; left: 2px; right: 2px;
+  background: rgba(0,0,0,0.5); color: #fff; font-size: 8px; padding: 1px 3px;
+}
+.cb  { background: linear-gradient(135deg,#4a90d9,#2060a0); }
+.cg  { background: linear-gradient(135deg,#60b040,#308020); }
+.co  { background: linear-gradient(135deg,#e08030,#a04010); }
+.cp  { background: linear-gradient(135deg,#8050c0,#502090); }
+.cpk { background: linear-gradient(135deg,#e060a0,#a03070); }
+.ct  { background: linear-gradient(135deg,#40b0b0,#208080); }
+.cr  { background: linear-gradient(135deg,#e04040,#a01010); }
+.cy  { background: linear-gradient(135deg,#e0c040,#a08010); }
 </style>
 </head>
 <body>
 
-<!-- TITLE BAR -->
-<div class="titlebar">
-  <span>WorldWideWeb Browser — Document</span>
-  <div class="titlebar-controls">
-    <div class="titlebar-btn">_</div>
-    <div class="titlebar-btn">□</div>
-    <div class="titlebar-btn">✕</div>
+<div id="hint">click anywhere to continue →</div>
+
+<!-- ══ ERA 1 ══ -->
+<div class="era" id="era1">
+  <div class="e1-titlebar">
+    <span>WorldWideWeb Browser — Document</span>
+    <div><span class="e1-tbtn">_</span><span class="e1-tbtn">□</span><span class="e1-tbtn">✕</span></div>
   </div>
+  <div class="e1-menubar">
+    <span>File</span><span>Edit</span><span>Options</span><span>Navigate</span><span>Annotate</span><span>Help</span>
+  </div>
+  <div class="e1-toolbar">
+    <button class="e1-btn">◀ Back</button>
+    <button class="e1-btn">▶ Next</button>
+    <button class="e1-btn">⌂ Home</button>
+    <div style="width:1px;height:24px;background:#808080;margin:0 4px"></div>
+    <button class="e1-btn">↺ Reload</button>
+    <button class="e1-btn">✕ Stop</button>
+  </div>
+  <div class="e1-addrbar">
+    <b>Document URL:</b>
+    <input value="http://www.worldwideweb.org/about/internet.html" readonly>
+  </div>
+  <div class="e1-content">
+    <div class="e1-header">
+      <div class="e1-title">INTERNET</div>
+      <div class="e1-sub">World Wide Web Information Document · Est. 1991</div>
+    </div>
+    <p>Welcome to the <a>World Wide Web</a>. This document contains information about the internet and how it is used to share text, data, and hyperlinked documents across the global network.</p>
+    <hr>
+    <p style="font-style:italic;font-size:13px">Jan '94</p>
+    <p>For decades, the internet was built around text. Documents were written, shared, and stored as words on a page. The <a>hyperlink</a> made it possible to connect one document to another, and the web was born.</p>
+    <hr>
+    <p>Available resources on this document server:</p>
+    <ul class="e1-list">
+      <li>Text documents — fully indexed and searchable</li>
+      <li>Image libraries — not yet. Coming soon.</li>
+      <li>Video files — not supported <span class="blink">_</span></li>
+    </ul>
+    <hr>
+    <p>The content is there. Software just can't reach it yet.</p>
+  </div>
+  <div class="e1-statusbar"><span>Document: Done</span><span>NUM</span></div>
 </div>
 
-<!-- MENU BAR -->
-<div class="menubar">
-  <span>File</span>
-  <span>Edit</span>
-  <span>Options</span>
-  <span>Navigate</span>
-  <span>Annotate</span>
-  <span>Help</span>
-</div>
+<!-- ══ ERA 2 ══ -->
+<div class="era hidden" id="era2">
 
-<!-- TOOLBAR -->
-<div class="toolbar">
-  <button class="toolbar-btn">◀ Back</button>
-  <button class="toolbar-btn">▶ Next</button>
-  <button class="toolbar-btn">⌂ Home</button>
-  <div class="toolbar-sep"></div>
-  <button class="toolbar-btn">↺ Reload</button>
-  <button class="toolbar-btn">✕ Stop</button>
-</div>
+  <div class="sk-vo" id="skvo">Then images became the language of the web.</div>
 
-<!-- ADDRESS BAR -->
-<div class="addressbar">
-  <span class="addressbar-label">Document URL:</span>
-  <input class="addressbar-input" value="http://www.worldwideweb.org/about/internet.html" readonly>
-</div>
+  <div class="sk-icons">
+    <div class="sk-icon"><div style="font-size:32px">🖥️</div><span>My Computer</span></div>
+    <div class="sk-icon"><div style="font-size:32px">🌐</div><span>Internet Explorer</span></div>
+    <div class="sk-icon"><div style="font-size:32px">🗑️</div><span>Recycle Bin</span></div>
+    <div class="sk-icon"><div style="font-size:32px">📁</div><span>My Photos</span></div>
+  </div>
 
-<!-- BROWSER WINDOW -->
-<div class="browser-window">
-
-  <!-- PAGE HEADER -->
-  <div class="page-header fade-row d1">
-    <div>
-      <div class="page-header-title">INTERNET</div>
-      <div class="page-header-sub">World Wide Web Information Document · Est. 1991</div>
+  <!-- Win 1: Photo Explorer -->
+  <div class="sk-win" id="w1" style="left:90px;top:56px;width:340px;z-index:12">
+    <div class="sk-winbar">
+      <div class="sk-wintitle">📁 My Photo Gallery — Windows Explorer</div>
+      <div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div>
+    </div>
+    <div class="sk-winbody">
+      <div class="imgrid g4" style="margin-bottom:6px">
+        <div class="imgcell cb">🏔️<div class="lbl">Alps.jpg</div></div>
+        <div class="imgcell cg">🌿<div class="lbl">Garden.jpg</div></div>
+        <div class="imgcell co">🌅<div class="lbl">Sunset.jpg</div></div>
+        <div class="imgcell cp">🌌<div class="lbl">Night.jpg</div></div>
+      </div>
+      <div class="imgrid g4">
+        <div class="imgcell cpk">🎉<div class="lbl">Party.jpg</div></div>
+        <div class="imgcell ct">🌊<div class="lbl">Beach.jpg</div></div>
+        <div class="imgcell cr">🌇<div class="lbl">City.jpg</div></div>
+        <div class="imgcell cy">⛺<div class="lbl">Camp.jpg</div></div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:#555">8 objects · 24.4 MB</div>
     </div>
   </div>
 
-  <div class="page-body">
-
-    <p class="fade-row d2">
-      Welcome to the <a>World Wide Web</a>. This document contains information about the internet and how it is used to share text, data, and hyperlinked documents across the global network.
-    </p>
-
-    <hr class="fade-row d2">
-
-    <p class="date-label fade-row d3">Jan '94</p>
-
-    <p class="fade-row d3">
-      For decades, the internet was built around text. Documents were written, shared, and stored as words on a page. The <a>hyperlink</a> made it possible to connect one document to another, and the web was born.
-    </p>
-
-    <p class="fade-row d4">
-      Then images became the language of the web. Photographs, illustrations, and graphics began to fill pages that were once purely text. Software could read images, index them, and make them searchable.
-    </p>
-
-    <p class="fade-row d5">
-      <strong>Now, the world runs on video.</strong>
-    </p>
-
-    <hr class="fade-row d5">
-
-    <p class="fade-row d5">Available resources on this document server:</p>
-
-    <ul class="bullet-list">
-      <li class="fade-row d6"><a>Text documents</a> — fully indexed and searchable</li>
-      <li class="fade-row d6"><a>Image libraries</a> — browsable by filename and tag</li>
-      <li class="fade-row d7"><a>Video files</a> — stored, but the content is there. Software just can't reach it. <span class="blink">_</span></li>
-    </ul>
-
-    <hr class="fade-row d7">
-
-    <p class="fade-row d8">
-      But video is the hardest format for software to understand. Hours of footage sit in folders, unlabeled, unsearchable, and unreachable. The content is there. Software just can't reach it.
-    </p>
-
+  <!-- Win 2: Flickr browser -->
+  <div class="sk-win" id="w2" style="left:300px;top:28px;width:420px;z-index:13">
+    <div class="sk-winbar">
+      <div class="sk-wintitle">🌐 Flickr — Share your photos! — Internet Explorer</div>
+      <div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div>
+    </div>
+    <div class="sk-winbody">
+      <div style="background:#0063dc;padding:6px 10px;margin:-10px -10px 10px;color:#fff;font-size:13px;font-weight:bold;display:flex;align-items:center;gap:8px">
+        <span style="font-size:20px">📸</span><span>flickr</span>
+        <span style="margin-left:auto;font-size:11px;font-weight:normal">Explore · Upload · Groups</span>
+      </div>
+      <div class="imgrid g3">
+        <div class="imgcell ct">🌊<div class="lbl">by user_87</div></div>
+        <div class="imgcell co">🏜️<div class="lbl">by traveler</div></div>
+        <div class="imgcell cb">🏙️<div class="lbl">by cityview</div></div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:#0063dc;text-decoration:underline;cursor:pointer">🔍 Search 3,847,291 photos...</div>
+    </div>
   </div>
+
+  <!-- Win 3: Picture Viewer -->
+  <div class="sk-win" id="w3" style="right:60px;top:80px;width:260px;z-index:15">
+    <div class="sk-winbar">
+      <div class="sk-wintitle">🖼️ Windows Picture Viewer</div>
+      <div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div>
+    </div>
+    <div class="sk-winbody" style="padding:0">
+      <div style="width:100%;height:150px;background:linear-gradient(135deg,#e08030,#a04010,#602000);display:flex;align-items:center;justify-content:center;font-size:52px">🌅</div>
+      <div style="background:#f0f0e8;padding:6px 10px;display:flex;justify-content:space-between;border-top:1px solid #c0c0c0">
+        <span style="font-size:11px;color:#555">Sunset_Bali_2007.jpg</span>
+        <span style="font-size:11px;color:#555">1024×768</span>
+      </div>
+      <div style="background:#ece9d8;padding:4px;display:flex;gap:8px;justify-content:center;border-top:1px solid #c0c0c0">
+        <span style="font-size:16px;cursor:pointer">◀</span>
+        <span style="font-size:16px;cursor:pointer">🔍</span>
+        <span style="font-size:16px;cursor:pointer">🖨️</span>
+        <span style="font-size:16px;cursor:pointer">▶</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Win 4: MySpace -->
+  <div class="sk-win" id="w4" style="left:180px;bottom:50px;width:380px;z-index:14">
+    <div class="sk-winbar">
+      <div class="sk-wintitle">🌐 MySpace — Tom's Profile — Internet Explorer</div>
+      <div class="sk-winbtns"><div class="sk-wbtn">_</div><div class="sk-wbtn">□</div><div class="sk-wbtn x">✕</div></div>
+    </div>
+    <div class="sk-winbody">
+      <div style="background:#003399;padding:4px 8px;margin:-10px -10px 10px;color:#fff;font-size:12px;font-weight:bold">
+        myspace. &nbsp;|&nbsp; <span style="font-weight:normal">Home &nbsp; Browse &nbsp; Photos &nbsp; Video</span>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:10px">
+        <div style="width:56px;height:56px;background:linear-gradient(135deg,#4a90d9,#2060a0);border:2px solid #888;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">👤</div>
+        <div>
+          <div style="font-weight:bold;font-size:13px">Tom Anderson</div>
+          <div style="font-size:11px;color:#555;margin:2px 0">34 · Los Angeles</div>
+          <div style="font-size:11px;color:#0000cc;text-decoration:underline;cursor:pointer">View Photos (247)</div>
+        </div>
+      </div>
+      <div class="imgrid g4">
+        <div class="imgcell cpk">🎸<div class="lbl">concert</div></div>
+        <div class="imgcell ct">🏖️<div class="lbl">beach</div></div>
+        <div class="imgcell co">🌆<div class="lbl">LA</div></div>
+        <div class="imgcell cp">🎉<div class="lbl">party</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Win 5: Alert -->
+  <div class="sk-win" id="w5" style="right:70px;bottom:110px;width:220px;z-index:16">
+    <div class="sk-winbar">
+      <div class="sk-wintitle">⚠️ New Images Available</div>
+      <div class="sk-winbtns"><div class="sk-wbtn x">✕</div></div>
+    </div>
+    <div class="sk-winbody" style="text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">🖼️</div>
+      <p style="font-size:12px;margin-bottom:10px">The web speaks images now.<br>Software can finally see the page.</p>
+      <div style="font-size:11px;color:#555;border-top:1px solid #ccc;padding-top:8px">
+        But video? Still just a filename. <span class="blink">_</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="sk-taskbar">
+    <button class="sk-start">🪟 Start</button>
+    <div class="sk-task">📁 My Photo Gallery</div>
+    <div class="sk-task">🌐 Flickr - Internet Explorer</div>
+    <div class="sk-task">🖼️ Picture Viewer</div>
+    <div class="sk-clock" id="clock">10:32 AM</div>
+  </div>
+
 </div>
 
-<!-- STATUS BAR -->
-<div class="statusbar">
-  <span>Document: Done</span>
-  <span>NUM</span>
-</div>
+<script>
+  let era = 1;
 
+  // Clock
+  function tick() {
+    const d = new Date(), h = d.getHours() % 12 || 12, m = d.getMinutes();
+    document.getElementById('clock').textContent = `${h}:${String(m).padStart(2,'0')} ${d.getHours()>=12?'PM':'AM'}`;
+  }
+  setInterval(tick, 1000); tick();
+
+  function showEra2() {
+    document.getElementById('era1').classList.add('hidden');
+    document.getElementById('era2').classList.remove('hidden');
+    document.getElementById('hint').style.opacity = '0';
+    era = 2;
+
+    const wins = ['w1','w2','w3','w4','w5'];
+    const delays = [200, 500, 850, 1150, 1600];
+    wins.forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('show'), delays[i]));
+    setTimeout(() => document.getElementById('skvo').classList.add('show'), 200);
+  }
+
+  document.body.addEventListener('click', () => { if (era === 1) showEra2(); });
+</script>
 </body>
 </html>
